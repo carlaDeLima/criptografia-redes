@@ -1,7 +1,9 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     private var cesarClick = false
     private var cripClick = false
     private var sDesClick = false
+
+    private var teste: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
                 sDesClick = false
                 s_des_Button.isEnabled = false
+
+                teste?.let {
+                    imageUpload.setImageBitmap(CriptCesar().cript(it, 5))
+                }
                 true
             }
         }
@@ -95,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             val picturePath = cursor.getString(columnIndex)
             cursor.close()
             imageUpload.setImageBitmap(BitmapFactory.decodeFile(picturePath))
-            var teste = BitmapFactory.decodeFile(picturePath)
+            teste = BitmapFactory.decodeFile(picturePath)
 
         }
     }
