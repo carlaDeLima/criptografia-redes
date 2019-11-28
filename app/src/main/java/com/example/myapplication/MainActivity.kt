@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,8 +15,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var cesarClick = false
-    private var cripClick = false
+    private var xorClick = false
     private var sDesClick = false
+
     private var imageOriginal: Bitmap? = null
     private var imageDecriptada: Bitmap? = null
     private var imageCriptada: Bitmap? = null
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         uploadButton.setOnClickListener {
-            //cesarClick
             val i = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -37,21 +36,21 @@ class MainActivity : AppCompatActivity() {
 
         cesarButton.setOnClickListener {
             cesarClick = if (cesarClick) {
-                cripClick = false
-                cripButton.isEnabled = true
+                xorClick = false
+                xorButton.isEnabled = true
 
                 sDesClick = false
                 s_des_Button.isEnabled = true
 
                 imageCriptada?.let {
                     imageDecriptada = CriptCesar().decript(it, 125)
-
                     imageUpload.setImageBitmap(imageDecriptada)
                 }
+
                 false
             } else {
-                cripClick = false
-                cripButton.isEnabled = false
+                xorClick = false
+                xorButton.isEnabled = false
 
                 sDesClick = false
                 s_des_Button.isEnabled = false
@@ -59,19 +58,25 @@ class MainActivity : AppCompatActivity() {
                 imageDecriptada?.let {
                     imageCriptada = CriptCesar().cript(it, 125)
                     imageUpload.setImageBitmap(imageCriptada)
-                    Log.d("log","2")
                 }
 
                 true
             }
         }
-        cripButton.setOnClickListener {
-            cripClick = if (cripClick) {
+
+        xorButton.setOnClickListener {
+            xorClick = if (xorClick) {
                 cesarClick = false
                 cesarButton.isEnabled = true
 
                 sDesClick = false
                 s_des_Button.isEnabled = true
+
+                imageCriptada?.let {
+                    imageDecriptada = CriptXor().decript(it, 125)
+                    imageUpload.setImageBitmap(imageDecriptada)
+                }
+
                 false
             } else {
                 cesarClick = false
@@ -79,6 +84,12 @@ class MainActivity : AppCompatActivity() {
 
                 sDesClick = false
                 s_des_Button.isEnabled = false
+
+                imageDecriptada?.let {
+                    imageCriptada = CriptXor().cript(it, 125)
+                    imageUpload.setImageBitmap(imageCriptada)
+                }
+
                 true
             }
         }
@@ -87,15 +98,15 @@ class MainActivity : AppCompatActivity() {
                 cesarClick = false
                 cesarButton.isEnabled = true
 
-                cripClick = false
-                cripButton.isEnabled = true
+                xorClick = false
+                xorButton.isEnabled = true
                 false
             } else {
                 cesarClick = false
                 cesarButton.isEnabled = false
 
-                cripClick = false
-                cripButton.isEnabled = false
+                xorClick = false
+                xorButton.isEnabled = false
                 true
             }
         }
@@ -114,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
             imageUpload.setImageBitmap(BitmapFactory.decodeFile(picturePath))
             imageDecriptada = BitmapFactory.decodeFile(picturePath)
-            imageOriginal = imageDecriptada;
+            imageOriginal = imageDecriptada
 
         }
     }

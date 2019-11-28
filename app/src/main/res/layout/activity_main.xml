@@ -36,17 +36,17 @@
         android:layout_marginLeft="16dp"
         android:text="cesar"
         app:layout_constraintBottom_toBottomOf="@+id/uploadButton"
-        app:layout_constraintEnd_toStartOf="@+id/cripButton"
+        app:layout_constraintEnd_toStartOf="@+id/xorButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/uploadButton" />
 
     <Button
-        android:id="@+id/cripButton"
+        android:id="@+id/xorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="crip"
+        android:text="xor"
         app:layout_constraintBottom_toBottomOf="@+id/cesarButton"
         app:layout_constraintEnd_toStartOf="@+id/s_des_Button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -59,9 +59,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:text="S-des"
-        app:layout_constraintBottom_toBottomOf="@+id/cripButton"
+        app:layout_constraintBottom_toBottomOf="@+id/xorButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cripButton" />
+        app:layout_constraintStart_toEndOf="@+id/xorButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
