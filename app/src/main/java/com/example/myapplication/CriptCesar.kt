@@ -6,23 +6,22 @@ import android.graphics.Color
 class CriptCesar {
 
     fun decript(photo: Bitmap, cifra: Int): Bitmap {
-        val bmp = Bitmap.createBitmap(photo.width, photo.height, Bitmap.Config.ARGB_8888)
+        val bmp = Bitmap.createBitmap(photo.width, photo.height,Bitmap.Config.ARGB_8888)
         for (x in 0 until photo.width) {
             for (y in 0 until photo.height) {
                 val pixel = photo.getPixel(x, y)
-
                 var red = Color.red(pixel) - cifra
                 var blue = Color.blue(pixel) - cifra
                 var green = Color.green(pixel) - cifra
 
                 if (blue < 0) {
-                    blue += 255
+                    blue += 256
                 }
                 if (green < 0) {
-                    green += 255
+                    green += 256
                 }
                 if (red < 0) {
-                    red += 255
+                    red += 256
                 }
 
                 bmp.setPixel(x, y, Color.rgb(red, green, blue))
@@ -39,19 +38,19 @@ class CriptCesar {
             for (y in 0 until photo.height) {
 
                 val pixel = photo.getPixel(x, y)
-
                 var red = Color.red(pixel) + cifra
                 var blue = Color.blue(pixel) + cifra
                 var green = Color.green(pixel) + cifra
 
-                if (blue > 255) {
-                    blue %= 255
+
+                if (blue > 256) {
+                    blue %= 256
                 }
-                if (green > 255) {
-                    green %= 255
+                if (green > 256) {
+                    green %= 256
                 }
-                if (red > 255) {
-                    red %= 255
+                if (red > 256) {
+                    red %= 256
                 }
 
                 bmp.setPixel(x, y, Color.rgb(red, green, blue))

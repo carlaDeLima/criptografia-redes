@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var cesarClick = false
     private var cripClick = false
     private var sDesClick = false
-
+    private var imageOriginal: Bitmap? = null
     private var imageDecriptada: Bitmap? = null
     private var imageCriptada: Bitmap? = null
 
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
                 imageCriptada?.let {
                     imageDecriptada = CriptCesar().decript(it, 125)
+
                     imageUpload.setImageBitmap(imageDecriptada)
                 }
                 false
@@ -57,7 +59,9 @@ class MainActivity : AppCompatActivity() {
                 imageDecriptada?.let {
                     imageCriptada = CriptCesar().cript(it, 125)
                     imageUpload.setImageBitmap(imageCriptada)
+                    Log.d("log","2")
                 }
+
                 true
             }
         }
@@ -110,6 +114,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
             imageUpload.setImageBitmap(BitmapFactory.decodeFile(picturePath))
             imageDecriptada = BitmapFactory.decodeFile(picturePath)
+            imageOriginal = imageDecriptada;
 
         }
     }
